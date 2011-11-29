@@ -5,7 +5,7 @@ public class C2 {
 		System.err.println();
 		;;;;;;
 		//---
-		
+		int i;
 	}
 
 }
