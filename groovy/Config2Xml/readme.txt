@@ -1,0 +1,1 @@
+Sample groovy script that reads properties from file and converts them into XML.

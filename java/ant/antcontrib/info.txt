@@ -1,0 +1,5 @@
+Example of using antcontriblibrary and XSLT.
+This projects aim is to process xml.
+1) read ids from data/studiesIds.txt
+2) filter data/allStudies.xml by ids and produce target/selectedStudies.xml
+3) produce target/studies-config.xml from target/selectedStudies.xml using XSLT

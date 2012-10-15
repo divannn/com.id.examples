@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:ac="antlib:net.sf.antcontrib"
+	name="Procecc Studies" basedir="." default="genStudiesList">
+    <description>Ant contrib usage demo</description>  
+
+	<target name="init"
+		depends="init.variables, initAntContrib, initGenStudiesTask" >
+       <tstamp>
+           <format property="DSTAMP" pattern="yyyyMMdd-HHmmss"/>
+       </tstamp>
+       <mkdir dir="${project.target}"/>
+	</target>
+
+	<target name="init.variables">
+		<property name="project.folder" value="${basedir}"/>
+		<property name="project.target" value="${basedir}/target"/>
+
+		<property name="studies.src.folder" value="${project.folder}/data"/>
+		<property name="studies.dst.folder" value="${project.target}"/>
+
+		<echo>basedir: ${basedir} </echo>
+
+		<echo>project.folder: ${project.folder} </echo>
+		<echo>studies.src.folder: ${studies.src.folder} </echo>
+		<echo>studies.dst.folder: ${studies.dst.folder} </echo>
+	</target>
+
+	<target name="clean" depends="init.variables">
+        <delete dir="${project.target}"/>
+	</target>
+
+	<target name="initAntContrib">
+		<typedef resource="net/sf/antcontrib/antlib.xml"
+			uri="antlib:net.sf.antcontrib">
+			<classpath>
+				<pathelement location="libs/ant-contrib-1.0b3.jar" />
+			</classpath>
+		</typedef>
+	</target>
+
+	<target name="initGenStudiesTask">
+		<path id="taskLocation">
+			<fileset dir="${project.folder}/libs" includes="GenStudiesTask.jar"/>
+		</path>
+		<taskdef name="genstudies" classname="GenerateStudies" classpathref="taskLocation"/>
+	</target>
+
+	<target name="genStudiesList" depends="clean, genXPath">
+        <!-- Generate studies definition file -->
+		<!--echo> XPATH:  ${xPath}</echo-->
+	    <genstudies source="${studies.src.folder}/allStudies.xml" 
+                    target="${studies.dst.folder}/selectedStudies.xml"
+                    xpath="${xPath}" omitXmlDecl="true"/>
+        <!-- Generate studies flex config file -->
+        <xslt in="${studies.dst.folder}/selectedStudies.xml" 
+              out="${studies.dst.folder}/studies-config.xml" 
+              style="${project.folder}/studies-config.xsl"/>
+    </target>
+
+	<target name="genXPath" depends="init, loadStudies">
+		<!--echo> ===== Create definition list and studies-config with: ${studies}</echo-->
+
+		<!-- Property that can change -->
+        <ac:var name="query-string.var" value= "" />
+        <!-- Split studies ids-->
+        <ac:for list="${studies}" delimiter="," param="next">
+          <sequential>
+                <ac:var name="query-string.var" value= "${query-string.var} or @id='@{next}'" />
+          </sequential>
+        </ac:for>
+        <ac:var name="query-string.var" value= "${query-string.var} or" />
+        <!-- Trim trailing 'or' -->
+        <ac:propertyregex property="query-string.var" override="true"
+              input="${query-string.var}" regexp="or (.*) or"
+              select="\1" casesensitive="false" />
+        <ac:var name="query-string.var" value= "//indicators/indicator[${query-string.var}]" />
+        <property name="xPath" value= "${query-string.var}" />
+	</target>
+
+	<target name="loadStudies">
+        <!-- Load file content into property-->
+		<loadfile
+			property="studies"
+			srcFile="${studies.src.folder}/studiesIds.txt">
+			<filterchain>
+				<striplinebreaks />
+				<trim />
+			</filterchain>
+		</loadfile>
+	</target>
+</project>

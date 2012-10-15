@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project name="Test" default="help" basedir=".">
+    <description>A simple Java project</description>  
+
+    <property name="srcDir" location="src"/>
+    <property name="dstDir" location="target"/>
+    <property name="buildDir" location="target/classes"/>
+
+	<target name="help">
+		<echo message="There's no default target in this project."/>
+		<echo message="To show the list of all available targets use:"/>
+		<echo message="ant -projecthelp"/>
+	</target>
+
+    <target name="clean">
+      <delete dir="${buildDir}"/>
+      <delete dir="${dstDir}"/>
+    </target>
+
+    <target name="init">
+       <tstamp>
+           <format property="DSTAMP" pattern="yyyyMMdd-HHmmss"/>
+       </tstamp>
+       <mkdir dir="${buildDir}"/>
+       <mkdir dir="${dstDir}"/>
+    </target>
+
+    <target name="compile" depends="init" description="Compile sources">
+       <javac srcdir="${srcDir}" destdir="${buildDir}"/>
+    </target>
+
+    <target name="jar" depends="compile" description="Build distribution jar">
+       <jar destfile="${dstDir}/package-${DSTAMP}.jar" basedir="${buildDir}">
+         <manifest>
+           <attribute name="Built-By" value="${user.name}"/>
+           <attribute name="Main-Class" value="package.Main"/>
+         </manifest>
+       </jar>
+    </target>
+    <target name="src" depends="init" description="Build zip with sources">
+       <zip destfile="${dstDir}/package-src-${DSTAMP}.zip" basedir="${srcDir}"/>
+    </target>
+    <target name="all" depends ="jar,src" description="All targets"/>
+</project>

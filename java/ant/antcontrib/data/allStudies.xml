@@ -1,0 +1,1223 @@
+<indicators>
+	<indicator id="AccelerationDeceleration" overlaying="false" title="Acceleration/Deceleration" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.AccelerationDeceleration">
+		<lines>
+			<line title="A/D" type="HYSTOGRAM_TYPE">
+				<colors>
+					<color>fuchsiaColor</color>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="AccumulationDistribution" overlaying="false" title="Accumulation/Distribution" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.AccumulationDistribution">
+		<lines>
+			<line title="AccDist" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="ADX" overlaying="false" title="ADX" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ADX">
+        <lines>
+            <line title="ADX" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="DM+" type="LINEAR_TYPE">
+                <colors>
+                    <color>blueColor</color>
+                </colors>
+            </line>
+            <line title="DM-" type="LINEAR_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="N" name="N" type="int">
+                <value>10</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+	<indicator id="AverageTrueRange" overlaying="false" title="Average True Range" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.AverageTrueRange">
+		<lines>
+			<line title="ATR" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="AwesomeOscillator" overlaying="false" title="Awesome Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.AwesomeOscillator">
+		<lines>
+			<line title="AwesomeOsc" type="HYSTOGRAM_TYPE">
+				<colors>
+					<color>fuchsiaColor</color>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="BollingerBands" overlaying="true" title="Bollinger Bands" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.BollingerBands">
+		<lines>
+			<line title="LowerBand" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="MidLine" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+			<line title="UpperBand" type="LINEAR_TYPE">
+				<colors>
+					<color>fuchsiaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>20</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="numDevDown" name="num dev down" type="DOUBLE_TYPE">
+				<value>-2.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="numDevUp" name="num dev up" type="DOUBLE_TYPE">
+				<value>2.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+		
+	<indicator id="CCI" overlaying="false" title="CCI" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.CCI">
+		<lines>
+			<line title="CCI" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>100</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>-100</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="ChaikinOscillator" overlaying="false" title="Chaikin Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ChaikinOscillator">
+		<lines>
+			<line title="ChaikinOsc" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="shortLength" name="short length" type="INTEGER_TYPE">
+				<value>3</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="longLength" name="long length" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="ChaikinVolatility" overlaying="false" title="Chaikin Volatility" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ChaikinVolatility">
+		<lines>
+			<line title="ChaikinVlt" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="shiftLength" name="shift length" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="ChandeMomentumOscillator" overlaying="false" title="Chande Momentum Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ChandeMomentumOscillator">
+		<lines>
+			<line title="CMO" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="UpperLevel" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="LowerLevel" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>20</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="DeMarker" overlaying="false" title="DeMarker" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.DeMarker">
+		<lines>
+			<line title="DeMarker" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="DetrendedPriceOsc" overlaying="false" title="Detrended Price Osc" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.DetrendedPriceOsc">
+		<lines>
+			<line title="DPO" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="ZeroLine" type="LINEAR_TYPE">
+				<colors>
+					<color>fuchsiaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="DMI" overlaying="false" title="DMI" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.DMI">
+		<lines>
+			<line title="DI-" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="DI+" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+			<line title="ADX" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="Elder" overlaying="false" title="Elder Ray" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.Elder">
+		<lines>
+			<line title="BullPower" type="LINEAR_TYPE">
+				<colors>
+					<color>greenColor</color>
+				</colors>
+			</line>
+			<line title="BearPower" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>13</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="EMA" overlaying="true" title="EMA" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.EMA">
+		<lines>
+			<line title="AvgExp" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>9</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+		
+	<indicator id="EnvelopeEMA" overlaying="true" title="EMA Envelope" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.EnvelopeEMA">
+		<lines>
+			<line title="UpperBand" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+			<line title="LowerBand" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="percentAbove" name="% above" type="DOUBLE_TYPE">
+				<value>10.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="percentBelow" name="% below" type="DOUBLE_TYPE">
+				<value>10.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="priceAbove" name="price high" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="priceBelow" name="price low" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="EnvelopeSMA" overlaying="true" title="SMA Envelope" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.EnvelopeSMA">
+		<lines>
+			<line title="UpperBand" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="LowerBand" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="percentAbove" name="% above" type="DOUBLE_TYPE">
+				<value>10.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="percentBelow" name="% below" type="DOUBLE_TYPE">
+				<value>10.0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="priceAbove" name="price high" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="priceBelow" name="price low" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="FastStochastic" overlaying="false" title="Fast Stochastic" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.FastStochastic">
+		<lines>
+			<line title="FastK" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="FastD" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="kperiod" name="%K period" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="dperiod" name="%D period" type="INTEGER_TYPE">
+				<value>3</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>80</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>20</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="ForceIndex" overlaying="false" title="Force Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ForceIndex">
+		<lines>
+			<line title="ForceIndex" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>13</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="GatorOscillator" overlaying="false" title="Gator Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.GatorOscillator">
+        <lines>
+            <line title="Histogram1" type="HYSTOGRAM_TYPE">
+                <colors>
+                    <color>blueColor</color>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Histogram2" type="HYSTOGRAM_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Zero" type="LINEAR_TYPE">
+                <colors>
+                    <color>aquaColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="high" name="high" type="PRICE_FIELD_TYPE">
+                <value>high</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="low" name="low" type="PRICE_FIELD_TYPE">
+                <value>low</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="k1" name="k1" type="int">
+                <value>13</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="k2" name="k2" type="int">
+                <value>8</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="k3" name="k3" type="int">
+                <value>5</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+	<indicator id="HLVolatility" overlaying="false" title="H-L Volatility" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.HLVolatility">
+		<lines>
+			<line title="H-LVlt" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="INTEGER_TYPE">
+				<value>9</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="Ichimoku" overlaying="true" title="Ichimoku" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.Ichimoku">
+        <lines>
+            <line title="tenkanSen" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="kijunSen" type="LINEAR_TYPE">
+                <colors>
+                    <color>blueColor</color>
+                </colors>
+            </line>
+            <line title="chinkouSpan" type="LINEAR_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                </colors>
+            </line>
+            <line title="senkouSpanA" type="LINEAR_TYPE">
+                <colors>
+                    <color>aquaColor</color>
+                </colors>
+            </line>
+            <line title="senkouSpanB" type="LINEAR_TYPE">
+                <colors>
+                    <color>yellowColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="N" name="N" type="int">
+                <value>9</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="M" name="M" type="int">
+                <value>26</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="Z" name="Z" type="int">
+                <value>52</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+	<indicator id="MACD" overlaying="false" title="MACD" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.MACD">
+		<lines>
+			<line title="Value" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Avg" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+			<line title="Diff" type="HYSTOGRAM_TYPE">
+				<colors>
+					<color>greenColor</color>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="fastLenght" name="fast length" type="PERIOD_TYPE">
+				<value>12</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="slowLength" name="slow length" type="PERIOD_TYPE">
+				<value>26</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="macdLength" name="macd length" type="PERIOD_TYPE">
+				<value>9</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="MarketFacilitationIndex" overlaying="false" title="Market Facilitation Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.MarketFacilitationIndex">
+		<lines>
+			<line title="MFIdx" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="MassIndex" overlaying="false" title="Mass Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.MassIndex">
+		<lines>
+			<line title="MI" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="Trigger" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+			<line title="Setup" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="setup" name="setup level" type="DOUBLE_TYPE">
+				<value>27</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="trigger" name="trigger level" type="DOUBLE_TYPE">
+				<value>26.5</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>9</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="sumLength" name="sum length" type="PERIOD_TYPE">
+				<value>25</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="Momentum" overlaying="false" title="Momentum" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.Momentum">
+		<lines>
+			<line title="Momentum" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>12</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="MoneyFlowIndex" overlaying="false" title="Money Flow Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.MoneyFlowIndex">
+		<lines>
+			<line title="MFIdx" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>80</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>20</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="NegativeVolumeIndex" overlaying="false" title="Negative Volume Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.NegativeVolumeIndex">
+		<lines>
+			<line title="NVI" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+		
+	<indicator id="OnBalanceVolume" overlaying="false" title="On Balance Volume" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.OnBalanceVolume">
+		<lines>
+			<line title="OBV" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="Oscillator" overlaying="false" title="Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.Oscillator">
+		<lines>
+			<line title="Oscillator" type="HYSTOGRAM_TYPE">
+				<colors>
+					<color>greenColor</color>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="Zero" type="LINEAR_TYPE">
+				<colors>
+					<color>yellowColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="fastLenght" name="fast length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="slowLength" name="slow length" type="PERIOD_TYPE">
+				<value>28</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>volume</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="Parabolic" overlaying="true" title="Parabolic" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ParabolicSAR">
+        <lines>
+            <line title="SAR" type="LINEAR_TYPE">
+                <colors>
+                    <color>whiteColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="high" name="high" type="PRICE_FIELD_TYPE">
+                <value>high</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="low" name="low" type="PRICE_FIELD_TYPE">
+                <value>low</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+	<indicator id="PriceChannel" overlaying="true" title="Price Channel" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.PriceChannel">
+		<lines>
+			<line title="PCU" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="PCL" type="LINEAR_TYPE">
+				<colors>
+					<color>greenColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="shiftLength" name="shift length" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>20</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="PriceVolumeTrend" overlaying="false" title="Price and Volume Trend" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.PriceVolumeTrend">
+		<lines>
+			<line title="PVT" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+	
+	<indicator id="RelativeStrengthIndex" overlaying="false" title="Relative Strength Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.RelativeStrengthIndex">
+		<lines>
+			<line title="RSI" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>70</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>30</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="RelativeVigorIndex" overlaying="false" title="Relative Vigor Index" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.RelativeVigorIndex">
+		<lines>
+			<line title="RVI" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+	</indicator>
+
+    <indicator id="RelativeVigorIndexSMA" overlaying="false" title="Relative Vigor Index SMA" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.RelativeVigorIndexSMA">
+		<lines>
+			<line title="RVI" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>10</value>
+			</parameter>
+	</indicator>
+		
+	<indicator id="ROC" overlaying="false" title="ROC" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ROC">
+        <lines>
+            <line title="ROC" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Zero" type="LINEAR_TYPE">
+                <colors>
+                    <color>aquaColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+                <value>12</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+                <value>close</value>
+            </parameter>
+        </parameters>
+    </indicator>
+    
+	<indicator id="SlowStochastic" overlaying="false" title="Slow Stochastic" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.SlowStochastic">
+		<lines>
+			<line title="SlowK" type="LINEAR_TYPE">
+				<colors>
+					<color>fuchsiaColor</color>
+				</colors>
+			</line>
+			<line title="SlowD" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="kperiod" name="%K period" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="dperiod" name="%D period" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>80</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>20</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="SMA" overlaying="true" title="SMA" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.SMA">
+		<lines>
+			<line title="SMA" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>9</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="SMMA" overlaying="true" title="SMMA" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.SMMA">
+		<lines>
+			<line title="SMMA" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>9</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+		
+	<indicator id="SmoothedRateOfChange" overlaying="false" title="SROC" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.SROC">
+        <lines>
+            <line title="ROC" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Zero" type="LINEAR_TYPE">
+                <colors>
+                    <color>aquaColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+                <value>12</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="shiftLength" name="shift length" type="INTEGER_TYPE">
+				<value>6</value>
+			</parameter>
+            <parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+                <value>close</value>
+            </parameter>
+        </parameters>
+    </indicator>
+    
+    <indicator id="StandardDeviationChannel" overlaying="true" title="StandardDeviationChannel" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.StandardDeviationChannel">
+        <lines>
+            <line title="SDC" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Resistance" type="LINEAR_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                </colors>
+            </line>
+            <line title="Support" type="LINEAR_TYPE">
+                <colors>
+                    <color>blueColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="N" name="N" type="int">
+                <value>3</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+                <value>close</value>
+            </parameter>
+        </parameters>
+    </indicator>
+    
+    <indicator id="StdDevVolatility" overlaying="false" title="StdDev Volatility" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.StdDevVolatility">
+		<lines>
+			<line title="StdDevVlt" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="INTEGER_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="TRIX" overlaying="false" title="TRIX" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.TripleEMA">
+        <lines>
+            <line title="TRIX" type="HYSTOGRAM_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Zero" type="LINEAR_TYPE">
+                <colors>
+                    <color>aquaColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+                <value>9</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+                <value>close</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+	<indicator id="UltimateOscillator" overlaying="false" title="Ultimate Oscillator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.UltimateOscillator">
+		<lines>
+			<line title="UO" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="fastLength" name="fast length" type="PERIOD_TYPE">
+				<value>7</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="mediumLength" name="medium length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="slowLength" name="slow length" type="PERIOD_TYPE">
+				<value>28</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="VerticalHorizontalFilter" overlaying="false" title="Vertical Horizontal Filter" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.VerticalHorizontalFilter">
+		<lines>
+			<line title="VHF" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="INTEGER_TYPE">
+				<value>10</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="VWAP" overlaying="false" title="Volume Weighted Average Price" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.VWAP">
+		<lines>
+			<line title="VWAP" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="INTEGER_TYPE">
+				<value>9</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="WildersSmoothing" overlaying="true" title="Wilders Smoothing" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.WildersSmoothing">
+		<lines>
+			<line title="WS" type="LINEAR_TYPE">
+				<colors>
+					<color>blueColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>14</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="displace" name="displace" type="INTEGER_TYPE">
+				<value>0</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+				<value>close</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="WilliamsAlligator" overlaying="true" title="Williams Alligator" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.WilliamsAlligator">
+        <lines>
+            <line title="Jaw" type="LINEAR_TYPE">
+                <colors>
+                    <color>blueColor</color>
+                </colors>
+            </line>
+            <line title="Teeth" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+            <line title="Lips" type="LINEAR_TYPE">
+                <colors>
+                    <color>greenColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="priceHigh" name="price high" type="PRICE_FIELD_TYPE">
+                <value>high</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="priceLow" name="price low" type="PRICE_FIELD_TYPE">
+                <value>low</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="jawLength" name="jaw length" type="int">
+                <value>13</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="teethLength" name="teeth length" type="int">
+                <value>8</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="lipsLength" name="lips length" type="int">
+                <value>5</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="lipsDisplace" name="lips displace" type="int">
+                <value>3</value>
+            </parameter>
+        </parameters>
+    </indicator>
+
+	<indicator id="WilliamsPercentRange" overlaying="false" title="Williams Percent Range" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.WilliamsPercentRange">
+		<lines>
+			<line title="WPR" type="LINEAR_TYPE">
+				<colors>
+					<color>redColor</color>
+				</colors>
+			</line>
+			<line title="OverSold" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+			<line title="OverBought" type="LINEAR_TYPE">
+				<colors>
+					<color>aquaColor</color>
+				</colors>
+			</line>
+		</lines>
+		<parameters>
+			<parameter paramNameForOffLineCalculation="length" name="length" type="PERIOD_TYPE">
+				<value>10</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="overbought" name="over bought" type="INTEGER_TYPE">
+				<value>-20</value>
+			</parameter>
+			<parameter paramNameForOffLineCalculation="oversold" name="over sold" type="INTEGER_TYPE">
+				<value>-80</value>
+			</parameter>
+		</parameters>
+	</indicator>
+	
+	<indicator id="ZigZag" overlaying="true" title="ZigZag" calculateClass="com.devexperts.flexchart.server.offlineServices.indicators.calc.studies.ZigZag">
+        <lines>
+            <line title="ZigZag" type="LINEAR_TYPE">
+                <colors>
+                    <color>redColor</color>
+                </colors>
+            </line>
+        </lines>
+        <parameters>
+            <parameter paramNameForOffLineCalculation="price" name="price" type="PRICE_FIELD_TYPE">
+                <value>high</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="depth" name="depth" type="int">
+                <value>10</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="deviation" name="deviation" type="int">
+                <value>5</value>
+            </parameter>
+            <parameter paramNameForOffLineCalculation="backstep" name="backstep" type="int">
+                <value>1</value>
+            </parameter>
+        </parameters>
+    </indicator>
+	
+</indicators>

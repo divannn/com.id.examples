@@ -1,0 +1,17 @@
+RPAREN=5
+WS=13
+MOD=8
+PLUS=9
+INT=11
+DIGIT=12
+MINUS=10
+DIV=7
+MUL=6
+LPAREN=4
+'/'=7
+'('=4
+'-'=10
+'*'=6
+'+'=9
+')'=5
+'%'=8

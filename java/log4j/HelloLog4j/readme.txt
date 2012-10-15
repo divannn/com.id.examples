@@ -1,0 +1,1 @@
+Simple demo hot to use/configure log4j.
