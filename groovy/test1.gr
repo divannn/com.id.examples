@@ -1,0 +1,6 @@
+str = "Hello";
+println str[2..-2];
+
+//literals
+println '${new Date()}';//won't substitute - like in Java.
+println "${new Date()}";//value will be substituted.
