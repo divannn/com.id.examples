@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>com.id.example.flex</groupId>
+    <artifactId>swc-lib</artifactId>
+	<version>1.0-SNAPSHOT</version>
+    <name>swc-lib</name>
+    <description>Build swc library that doesn't include SDK classes</description>
+    <packaging>swc</packaging>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	  <flexmojos-maven-plugin.version>3.9</flexmojos-maven-plugin.version>
+  	  <flex.sdk.version>4.1.0.16076</flex.sdk.version>
+      <flex.unit.version>4.0-rc-1</flex.unit.version>
+    </properties>
+
+    <dependencies>
+       <dependency>
+         <groupId>com.adobe.flex.framework</groupId>
+         <artifactId>flex-framework</artifactId>
+		 <version>${flex.sdk.version}</version>
+         <type>pom</type>
+         <!-- Do not include SDK clasess -->
+         <scope>external</scope>
+       </dependency>
+    </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/flex</sourceDirectory>
+    <testSourceDirectory>src/test/flex</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+	    <version>${flexmojos-maven-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <debug>true</debug>
+          <linkReport>true</linkReport>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+		<groupId>com.mydomain.mypackage</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0</version>
+    </parent>
+    
+	<artifactId>flex-module</artifactId>
+	<packaging>swf</packaging>
+	<name>flex-module</name>
+
+    <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <type>pom</type>
+          </dependency>
+          <dependency>
+              <groupId>com.mydomain.mypackage</groupId>
+	          <artifactId>flex-core-library</artifactId>
+              <type>swc</type>
+              <scope>external</scope>
+           </dependency>
+     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+                <debug>true</debug>                
+                <linkReport>true</linkReport>
+                <sourceFile>FlexModule.mxml</sourceFile>
+                <!--output>flex-module.swf</output-->
+                <!-- Exclude code that embedded in flex-client-->
+                <loadExterns>
+					<MavenArtifact>
+						<groupId>com.mydomain.mypackage</groupId>
+						<artifactId>flex-client</artifactId>
+						<version>${project.version}</version>
+					</MavenArtifact>
+                </loadExterns>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>

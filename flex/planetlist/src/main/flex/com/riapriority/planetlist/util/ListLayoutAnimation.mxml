@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	 ////////////////////////////////////////////////////////////////////////////////
+	 // Copyright (c) 2010, Konstantin Kovalev aka Constantiner (constantiner at gmail dot com)
+	 // All rights reserved.
+	 //
+	 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+	 // the following conditions are met:
+	 // * Redistributions of source code must retain the above copyright notice, this list of conditions and
+	 // the following disclaimer.
+	 // * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+	 // the following disclaimer in the documentation and/or other materials provided with the distribution.
+	 // * Neither the name of the Konstantin Kovalev aka Constantiner nor the names of its contributors
+	 // may be used to endorse or promote products derived from this software
+	 // without specific prior written permission.
+	 //
+	 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+	 // OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+	 // AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER
+	 // OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+	 // OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	 // LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+	 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+	 // OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	 ////////////////////////////////////////////////////////////////////////////////
+-->
+<s:Parallel effectEnd="layoutAnimationEndHandler(event)"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:s="library://ns.adobe.com/flex/spark">
+	<fx:Script>
+		<![CDATA[
+			import com.riapriority.planetlist.data.PlanetDescription;
+			import com.riapriority.planetlist.renderer.PlanetsImageHolder;
+			import com.riapriority.planetlist.renderer.RendererWithAnimation;
+			import mx.core.IVisualElement;
+			import mx.core.UIComponent;
+			import mx.events.EffectEvent;
+			import spark.components.Group;
+			import spark.components.IItemRenderer;
+			import spark.components.SkinnableDataContainer;
+			import spark.primitives.BitmapImage;
+
+			/**
+			 * Is component which contains list and which states switches.
+			 */
+			public var hostComponent:UIComponent;
+
+			/**
+			 * Is a List component.
+			 */
+			public var planetList:SkinnableDataContainer;
+			/**
+			 * Is a group to attach planet icons for animation between states.
+			 */
+			public var transitionHolder:Group;
+
+			/**
+			 * Changes state with animation.
+			 * @param state Is state for host component to set.
+			 */
+			public function animateStateChange(state:String):void
+			{
+				var i:int;
+				clearAnimation();
+				if (isPlaying)
+				{
+					stop();
+					planetList.visible = true;
+				}
+				targets = new Array();
+
+				for (i = 0; i < planetList.dataGroup.numElements; i++)
+				{
+					var imageHolderGeneral:IVisualElement = planetList.dataGroup.
+						getElementAt(i);
+					var rendererBitmap:BitmapImage = PlanetsImageHolder(imageHolderGeneral).
+						getPlanetImage();
+					var newBitmap:BitmapImage = new BitmapImage();
+					newBitmap.source = PlanetDescription(IItemRenderer(imageHolderGeneral).
+														 data).image;
+					transitionHolder.addElement(newBitmap);
+					var coordinates:Point = new Point(rendererBitmap.x, rendererBitmap.
+													  y);
+					var parent:DisplayObjectContainer = rendererBitmap.parent;
+					var newParent:DisplayObjectContainer = newBitmap.parent;
+					coordinates = parent.localToGlobal(coordinates);
+					coordinates = newParent.globalToLocal(coordinates);
+					newBitmap.width = rendererBitmap.width;
+					newBitmap.height = rendererBitmap.height;
+					newBitmap.x = coordinates.x;
+					newBitmap.y = coordinates.y;
+					targets.push(newBitmap);
+				}
+				captureStartValues();
+				// Workaround for switching from scrolled list.
+				var verticalScrollPosition:Number = planetList.dataGroup.verticalScrollPosition;
+				hostComponent.setCurrentState(state);
+				planetList.validateNow();
+				planetList.dataGroup.autoLayout = false;
+				planetList.visible = false;
+				animationStarter(verticalScrollPosition);
+			}
+
+			private function animationStarter(verticalScrollPosition:Number):void
+			{
+				for (var i:int = 0; i < planetList.dataGroup.numElements; i++)
+				{
+					var newImageHolderGeneral:IVisualElement = planetList.dataGroup.
+						getElementAt(i);
+					var newRendererBitmap:BitmapImage = PlanetsImageHolder(newImageHolderGeneral).
+						getPlanetImage();
+					var newBitmapRetrieved:BitmapImage = targets[i];
+					var newCoordinates:Point = new Point(newRendererBitmap.x, newRendererBitmap.
+														 y);
+					var parentOld:DisplayObjectContainer = newRendererBitmap.parent;
+					var parentNew:DisplayObjectContainer = newBitmapRetrieved.parent;
+					newCoordinates = parentOld.localToGlobal(newCoordinates);
+					newCoordinates = parentNew.globalToLocal(newCoordinates);
+					newBitmapRetrieved.width = newRendererBitmap.width;
+					newBitmapRetrieved.height = newRendererBitmap.height;
+					newBitmapRetrieved.x = newCoordinates.x;
+					newBitmapRetrieved.y = newCoordinates.y + verticalScrollPosition;
+					if (newImageHolderGeneral is RendererWithAnimation)
+					{
+						(newImageHolderGeneral as RendererWithAnimation).pauseAnimation();
+					}
+				}
+				captureEndValues();
+				play();
+			}
+
+			private function clearAnimation():void
+			{
+				if (targets && targets.length > 0)
+				{
+					for each (var existingBitmap:BitmapImage in targets)
+					{
+						transitionHolder.removeElement(existingBitmap);
+					}
+					targets = new Array();
+				}
+			}
+
+			private function layoutAnimationEndHandler(event:EffectEvent):void
+			{
+				clearAnimation();
+				planetList.dataGroup.autoLayout = true;
+				for (var i:int = 0; i < planetList.dataGroup.numElements; i++)
+				{
+					var renderer:IVisualElement = planetList.dataGroup.getElementAt(i);
+					if (renderer is RendererWithAnimation)
+					{
+						(renderer as RendererWithAnimation).resumeAnimation();
+					}
+				}
+				planetList.visible = true;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:Linear id="statesEasier"/>
+	</fx:Declarations>
+	<s:Move applyChangesPostLayout="false"
+		autoCenterTransform="true"
+		easer="{statesEasier}"/>
+	<s:Resize easer="{statesEasier}"/>
+</s:Parallel>

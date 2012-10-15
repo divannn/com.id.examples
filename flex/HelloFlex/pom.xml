@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.id.example.flex</groupId>
+	<artifactId>HelloFlex</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>swf</packaging>
+	<name>HelloFlex</name>
+
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	    <flex.sdk.version>3.5.0.12683</flex.sdk.version>
+  	    <flexmojos-maven-plugin.version>3.9</flexmojos-maven-plugin.version>
+        <!--flex.unit.version>0.90</flex.unit.version-->
+        <flex.unit.version>4.0-rc-1</flex.unit.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.sdk.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flexunit</groupId>
+			<artifactId>flexunit</artifactId>
+            <version>${flex.unit.version}</version>
+			<type>swc</type>
+			<scope>test</scope>
+		</dependency>
+		<!--dependency>
+			<groupId>com.adobe.flexunit</groupId>
+			<artifactId>uiRunner</artifactId>
+            <version>${flex.unit.version}</version>
+			<type>swc</type>
+			<scope>test</scope>
+		</dependency-->
+	</dependencies>
+
+	<build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.sonatype.flexmojos</groupId>
+              <artifactId>flexmojos-maven-plugin</artifactId>
+	          <version>${flexmojos-maven-plugin.version}</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+
+		<sourceDirectory>src/main/flex</sourceDirectory>
+		<testSourceDirectory>src/test/flex</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<extensions>true</extensions>
+                <configuration>
+                  <debug>true</debug>
+                  <configurationReport>true</configurationReport>
+                  <linkReport>true</linkReport>
+                  <!-- Main application file -->
+	              <sourceFile>package1/Main.mxml</sourceFile>
+                </configuration>
+                <dependencies>
+                  <dependency>
+                    <groupId>com.adobe.flex</groupId>
+                    <artifactId>compiler</artifactId>
+                    <version>${flex.sdk.version}</version>
+                    <type>pom</type>
+                  </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                      <id>wrapper-generation</id> 
+                      <phase>package</phase>
+                      <goals>
+                        <goal>wrapper</goal>
+                      </goals>
+                    </execution>
+                </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+    <profiles>
+        <profile>
+            <id>add-src</id>
+            <build>
+                <plugins>
+                    <plugin>
+				        <groupId>org.sonatype.flexmojos</groupId>
+				        <artifactId>flexmojos-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>source-generation</id> 
+                                <goals>
+                                    <goal>sources</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>add-asdoc</id>
+            <build>
+                <plugins>
+                    <plugin>
+				        <groupId>org.sonatype.flexmojos</groupId>
+				        <artifactId>flexmojos-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>asdoc-generation</id> 
+                                <!-- phase must be specified-->
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>asdoc</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

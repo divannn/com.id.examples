@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	 ////////////////////////////////////////////////////////////////////////////////
+	 // Copyright (c) 2010, Konstantin Kovalev aka Constantiner (constantiner at gmail dot com)
+	 // All rights reserved.
+	 //
+	 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+	 // the following conditions are met:
+	 // * Redistributions of source code must retain the above copyright notice, this list of conditions and
+	 // the following disclaimer.
+	 // * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+	 // the following disclaimer in the documentation and/or other materials provided with the distribution.
+	 // * Neither the name of the Konstantin Kovalev aka Constantiner nor the names of its contributors
+	 // may be used to endorse or promote products derived from this software
+	 // without specific prior written permission.
+	 //
+	 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+	 // OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+	 // AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER
+	 // OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+	 // OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	 // LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+	 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+	 // OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	 ////////////////////////////////////////////////////////////////////////////////
+-->
+<s:Application minHeight="600"
+	minWidth="955"
+	viewSourceURL="srcview/index.html"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:layout="com.riapriority.planetlist.layout.*"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:planetlist="com.riapriority.planetlist.*"
+	xmlns:renderer="com.riapriority.planetlist.renderer.*"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:util="com.riapriority.planetlist.util.*">
+	<fx:Library>
+		<fx:Definition name="SidePanelLayout">
+			<s:VerticalLayout paddingBottom="10"
+				paddingLeft="10"
+				paddingRight="10"
+				paddingTop="10"/>
+		</fx:Definition>
+	</fx:Library>
+	<fx:Declarations>
+		<util:ListLayoutAnimation hostComponent="{this}"
+			id="statesAnimation"
+			planetList="{planetList}"
+			transitionHolder="{transitionHolder}"/>
+	</fx:Declarations>
+	<fx:Metadata>
+		[ResourceBundle("commonPlanetList")]
+	</fx:Metadata>
+	<fx:Style>
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace renderer "com.riapriority.planetlist.renderer.*";
+		renderer|SolarPlanetRendererImplementation {
+			sun-image: Embed(source="assets/sun.png");
+			orbit-color: #999999;
+			orbit-thickness: 1;
+			rotation-multiplier: 10;
+			change-calculator-transition-duration: 1000;
+			change-calculator-transition-easing: ClassReference("spark.effects.easing.Bounce");
+		}
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			import com.riapriority.planetlist.data.PlanetDescription;
+			import com.riapriority.planetlist.data.PlanetsData;
+			import com.riapriority.planetlist.renderer.PlanetDetailsRenderer;
+			import com.riapriority.planetlist.renderer.SimplePlanetRenderer;
+			import com.riapriority.planetlist.renderer.SolarPlanetRendererImplementation;
+			import com.riapriority.planetlist.util.FlatPlanetCalculator;
+			import com.riapriority.planetlist.util.RelativePlanetCalculator;
+
+			import spark.effects.easing.Bounce;
+			import spark.effects.easing.Elastic;
+			import spark.effects.easing.Linear;
+			import spark.effects.easing.Power;
+			import spark.effects.easing.Sine;
+			import spark.utils.TextFlowUtil;
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout horizontalAlign="left"
+			paddingBottom="10"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingTop="10"
+			verticalAlign="top"/>
+	</s:layout>
+	<s:states>
+		<mx:State name="radial"/>
+		<mx:State name="tile"/>
+		<mx:State name="list"/>
+	</s:states>
+	<s:Panel height="100%"
+		title="{resourceManager.getString('commonPlanetList', 'planet.list.header')}"
+		width="50%">
+		<s:List borderVisible="false"
+			dataProvider="{new PlanetsData()}"
+			height="100%"
+			id="planetList"
+			itemRenderer="com.riapriority.planetlist.renderer.SolarPlanetRendererImplementation"
+			itemRenderer.list="com.riapriority.planetlist.renderer.PlanetDetailsRenderer"
+			itemRenderer.tile="com.riapriority.planetlist.renderer.SimplePlanetRenderer"
+			labelField="name"
+			useVirtualLayout="false"
+			width="100%">
+			<s:layout>
+				<layout:SolarPlanetLayout id="solarPlanetLayout"
+					planetCalculator="{new RelativePlanetCalculator()}"/>
+			</s:layout>
+			<s:layout.tile>
+				<s:TileLayout columnWidth="130"
+					horizontalAlign="center"
+					rowHeight="150"
+					verticalAlign="bottom"/>
+			</s:layout.tile>
+			<s:layout.list>
+				<s:VerticalLayout horizontalAlign="contentJustify"/>
+			</s:layout.list>
+		</s:List>
+		<s:Group clipAndEnableScrolling="true"
+			height="100%"
+			id="transitionHolder"
+			width="100%"
+			x="0"
+			y="0"/>
+	</s:Panel>
+	<s:VGroup height="100%"
+		width="50%">
+		<s:Panel height="100%"
+			title="{resourceManager.getString('commonPlanetList', 'details.header')}"
+			width="100%">
+			<s:layout>
+				<fx:SidePanelLayout/>
+			</s:layout>
+			<renderer:PlanetDetails details="{planetList.selectedItem as PlanetDescription}"
+				visible="{planetList.selectedItem}">
+				<renderer:layout>
+					<s:VerticalLayout/>
+				</renderer:layout>
+			</renderer:PlanetDetails>
+		</s:Panel>
+		<s:Panel height="100%"
+			title="{resourceManager.getString('commonPlanetList', 'dashboard.header')}"
+			width="100%">
+			<s:layout>
+				<fx:SidePanelLayout/>
+			</s:layout>
+			<mx:Form>
+				<mx:FormItem label="{resourceManager.getString('commonPlanetList', 'list.layout.title')}">
+					<s:DropDownList change="statesAnimation.animateStateChange(event.currentTarget.selectedItem.state)"
+						requireSelection="true">
+						<mx:ArrayCollection>
+							<fx:Object label="{resourceManager.getString('commonPlanetList', 'list.layout.orbital')}"
+								state="radial"/>
+							<fx:Object label="{resourceManager.getString('commonPlanetList', 'list.layout.tile')}"
+								state="tile"/>
+							<fx:Object label="{resourceManager.getString('commonPlanetList', 'list.layout.list')}"
+								state="list"/>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</mx:FormItem>
+				<mx:FormItem includeIn="radial"
+					label="{resourceManager.getString('commonPlanetList', 
+						'list.orbital.representation.title')}">
+					<s:DropDownList change="solarPlanetLayout.planetCalculator = 
+							event.currentTarget.selectedItem.calculator"
+						requireSelection="true">
+						<mx:ArrayCollection>
+							<fx:Object calculator="{new RelativePlanetCalculator()}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.relative')}"/>
+							<fx:Object calculator="{new FlatPlanetCalculator()}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.flat')}"/>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</mx:FormItem>
+				<mx:FormItem includeIn="radial"
+					label="{resourceManager.getString('commonPlanetList', 
+					'list.orbital.representation.transition.title')}">
+					<s:DropDownList change="styleManager.getStyleDeclaration(
+						'com.riapriority.planetlist.renderer.SolarPlanetRendererImplementation').
+						setStyle('changeCalculatorTransitionEasing', event.currentTarget.selectedItem.easing)"
+						requireSelection="true">
+						<mx:ArrayCollection>
+							<fx:Object easing="{Bounce}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.transition.bounce')}"/>
+							<fx:Object easing="{Elastic}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.transition.elastic')}"/>
+							<fx:Object easing="{Linear}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.transition.linear')}"/>
+							<fx:Object easing="{Power}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.transition.power')}"/>
+							<fx:Object easing="{Sine}"
+								label="{resourceManager.getString('commonPlanetList', 
+								'list.orbital.representation.transition.sine')}"/>
+						</mx:ArrayCollection>
+					</s:DropDownList>
+				</mx:FormItem>
+				<mx:FormItem includeIn="radial"
+					label="{resourceManager.getString('commonPlanetList', 
+					'list.orbital.rotation.speed.title')}">
+					<s:HSlider change="styleManager.getStyleDeclaration(
+							'com.riapriority.planetlist.renderer.SolarPlanetRendererImplementation').
+							setStyle('rotationMultiplier', event.currentTarget.value)"
+						liveDragging="false"
+						maximum="100"
+						minimum=".5"
+						stepSize=".5"
+						value="{styleManager.getStyleDeclaration(
+							'com.riapriority.planetlist.renderer.SolarPlanetRendererImplementation').
+							getStyle('rotationMultiplier')}"/>
+				</mx:FormItem>
+			</mx:Form>
+			<mx:Spacer height="100%"/>
+			<s:RichEditableText editable="false"
+				textFlow="{TextFlowUtil.importFromString(resourceManager.getString('commonPlanetList','icon.copyrights'))}"
+				width="100%"/>
+		</s:Panel>
+	</s:VGroup>
+</s:Application>

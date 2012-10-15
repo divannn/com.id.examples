@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mydomain.mypackage</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0</version>
+    <name>parent</name>
+    <packaging>pom</packaging>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+  	  <flexmojos-maven-plugin.version>3.9</flexmojos-maven-plugin.version>
+  	  <maven-assembly-plugin.version>2.2-beta-3</maven-assembly-plugin.version>
+
+  	  <!--flex.sdk.version>3.5.0.12683</flex.sdk.version-->
+  	  <flex.sdk.version>4.1.0.16076</flex.sdk.version>
+      <!--flex.unit.version>0.90</flex.unit.version-->
+      <flex.unit.version>4.0-rc-1</flex.unit.version>
+    </properties>
+
+    <dependencyManagement>
+      <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+
+          <!-- App -->
+          <dependency>
+            <groupId>com.mydomain.mypackage</groupId>
+            <artifactId>flex-core-library</artifactId>
+            <version>${project.version}</version>
+            <type>swc</type>
+          </dependency>
+          <dependency>
+            <groupId>com.mydomain.mypackage</groupId>
+            <artifactId>flex-client</artifactId>
+            <version>${project.version}</version>
+            <type>swf</type>
+          </dependency>
+          <dependency>
+            <groupId>com.mydomain.mypackage</groupId>
+            <artifactId>flex-module</artifactId>
+            <version>${project.version}</version>
+            <type>swf</type>
+          </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+		<testSourceDirectory>src/test/flex</testSourceDirectory>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.sonatype.flexmojos</groupId>
+              <artifactId>flexmojos-maven-plugin</artifactId>
+	          <version>${flexmojos-maven-plugin.version}</version>
+              <dependencies>
+                <dependency>
+                  <groupId>com.adobe.flex</groupId>
+                  <artifactId>compiler</artifactId>
+                  <version>${flex.sdk.version}</version>
+                  <type>pom</type>
+                </dependency>
+              </dependencies>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <version>${maven-assembly-plugin.version}</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

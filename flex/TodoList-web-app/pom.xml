@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.sonatype.flexmojos.flex-touchstone</groupId>
+  <artifactId>todolist</artifactId>
+  <name>todolist-parent</name>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<!--flex.sdk.version>3.2.0.3958</flex.sdk.version-->
+  	<flex.sdk.version>3.5.0.12683</flex.sdk.version>
+    <!--flex.unit.version>0.90</flex.unit.version-->
+    <flex.unit.version>4.0-rc-1</flex.unit.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+          <groupId>com.adobe.flex.framework</groupId>
+          <artifactId>flex-framework</artifactId>
+          <version>${flex.sdk.version}</version>
+          <type>pom</type>
+        </dependency>
+        <dependency>
+          <groupId>com.adobe.blazeds</groupId>
+          <artifactId>blazeds-remoting</artifactId>
+          <version>3.0</version>
+        </dependency>
+        <dependency>
+          <groupId>com.adobe.blazeds</groupId>
+          <artifactId>blazeds-common</artifactId>
+          <version>3.0</version>
+        </dependency>
+        <dependency>
+          <groupId>com.adobe.blazeds</groupId>
+          <artifactId>blazeds-core</artifactId>
+          <version>3.0</version>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.0.2</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2-beta-2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-maven-plugin</artifactId>
+	      <version>3.9</version> 
+          <dependencies>
+            <dependency>
+              <groupId>com.adobe.flex</groupId>
+              <artifactId>compiler</artifactId>
+              <version>${flex.sdk.version}</version>
+              <type>pom</type>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <modules>
+    <module>todolist-config</module>
+    <module>todolist-java</module>
+    <module>todolist-lib</module>
+    <module>todolist-ria</module>
+    <module>todolist-web</module>
+  </modules>
+
+</project>

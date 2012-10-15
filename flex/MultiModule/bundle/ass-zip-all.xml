@@ -1,0 +1,21 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<dependencySets>
+		<dependencySet>
+			<outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+			<includes>
+				<include>com.mydomain.mypackage:*:*:swf:*</include>
+			</includes>
+			<excludes>
+                <!-- Exclude flex framework libs.-->
+				<!--exclude>com.adobe.flex.framework:*</exclude-->
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+</assembly>

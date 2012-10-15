@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sonatype.flexmojos.flex-touchstone</groupId>
+    <artifactId>todolist</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>todolist-lib</artifactId>
+  <packaging>swc</packaging>
+  <name>todolist-lib</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>todolist-java</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/flex</sourceDirectory>
+    <plugins>
+      <plugin><!-- Flex (SWC and SWF) compilation -->
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <contextRoot>todolist-web</contextRoot>
+          <debug>true</debug>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>optimize</goal> <!-- Optimized RSL generation -->
+              <goal>generate</goal> <!-- ActionScript POJOs generation based on Java POJOs -->
+            </goals>
+            <configuration>
+              <includeJavaClasses>
+                <includeClass>*TodoItem</includeClass>
+              </includeJavaClasses>
+              <beanTemplate>
+                <template>${basedir}/src/main/template/beanBase.gsp</template>
+                <template>${basedir}/src/main/template/bean.gsp</template>
+              </beanTemplate>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

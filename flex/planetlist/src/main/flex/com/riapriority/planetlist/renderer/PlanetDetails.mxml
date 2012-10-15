@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	 ////////////////////////////////////////////////////////////////////////////////
+	 // Copyright (c) 2010, Konstantin Kovalev aka Constantiner (constantiner at gmail dot com)
+	 // All rights reserved.
+	 //
+	 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+	 // the following conditions are met:
+	 // * Redistributions of source code must retain the above copyright notice, this list of conditions and
+	 // the following disclaimer.
+	 // * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+	 // the following disclaimer in the documentation and/or other materials provided with the distribution.
+	 // * Neither the name of the Konstantin Kovalev aka Constantiner nor the names of its contributors
+	 // may be used to endorse or promote products derived from this software
+	 // without specific prior written permission.
+	 //
+	 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+	 // OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+	 // AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER
+	 // OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+	 // OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	 // LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+	 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+	 // OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	 ////////////////////////////////////////////////////////////////////////////////
+-->
+<s:Group implements="com.riapriority.planetlist.renderer.PlanetsImageHolder"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:s="library://ns.adobe.com/flex/spark">
+	<fx:Metadata>
+		[Event(name="detailsChange",type="flash.events.Event")]
+		[ResourceBundle("planetRenderers")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.riapriority.planetlist.data.PlanetDescription;
+			import mx.events.EffectEvent;
+
+			public static const DETAILS_CHANGE_EVENT:String = "detailsChange";
+
+			/**
+			 * Is it renderer (no transitions) or not (display transitions)
+			 */
+			public var rendererMode:Boolean = false;
+
+			private var _details:PlanetDescription;
+			private var fadingOut:Boolean = false;
+			private var postponedDetails:PlanetDescription;
+			private var postponedVisibility:Boolean;
+			private var visibilityChanging:Boolean = false;
+
+			private var visibilityDirty:Boolean = false;
+
+			[Bindable(event="detailsChange")]
+			public function get details():PlanetDescription
+			{
+				return _details;
+			}
+
+			public function set details(value:PlanetDescription):void
+			{
+				// In case of changing visibility (to false) and fading out the data is postponed so is not real
+				if (_details != value || visibilityChanging || fadeOut.isPlaying)
+				{
+					// Clear transition related data
+					if (fadeIn.isPlaying)
+					{
+						fadeIn.stop();
+					}
+					if (fadeOut.isPlaying)
+					{
+						fadeOut.stop();
+					}
+					fadingOut = false;
+					if (rendererMode)
+					{
+						// Set data without transitions
+						_details = value;
+						dispatchEvent(new Event(DETAILS_CHANGE_EVENT));
+					}
+					else if (_details)
+					{
+						// Change existing data
+						postponedDetails = value;
+						fadingOut = true;
+						fadeOut.play();
+					}
+					else
+					{
+						// Setting data for the first time with just only fading in
+						_details = value;
+						fadeIn.play();
+						dispatchEvent(new Event(DETAILS_CHANGE_EVENT));
+					}
+				}
+			}
+
+			/**
+			 * @inheritDoc
+			 */
+			public function getPlanetImage():BitmapImage
+			{
+				return planetImage;
+			}
+
+			/**
+			 * @inheritDoc
+			 */
+			override public function set visible(value:Boolean):void
+			{
+				if (rendererMode)
+				{
+					// Just do nothing special
+					super.visible = value;
+					visibilityDirty = false;
+					visibilityChanging = false;
+				}
+				else
+				{
+					if (!value && value != super.visible)
+					{
+						// Making control invisible
+						visibilityDirty = true;
+						postponedVisibility = value;
+						invalidateProperties();
+					}
+					else
+					{
+						// Nothing special too
+						super.visible = value;
+						visibilityDirty = false;
+						visibilityChanging = false;
+					}
+				}
+			}
+
+
+			/**
+			 * @inheritDoc
+			 */
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				if (visibilityDirty)
+				{
+					if (!fadingOut)
+					{
+						// if fading out not started yet just do the ordinary things
+						super.visible = postponedVisibility;
+						visibilityChanging = false;
+					}
+					else
+					{
+						// We are in transition
+						visibilityChanging = true;
+					}
+					visibilityDirty = false;
+				}
+			}
+
+			private function fadeOutEndHandler(event:EffectEvent):void
+			{
+				fadingOut = false;
+				if (postponedDetails)
+				{
+					_details = postponedDetails;
+					postponedDetails = null;
+					fadeIn.play();
+				}
+				else
+				{
+					_details = null;
+				}
+				if (visibilityChanging)
+				{
+					super.visible = postponedVisibility;
+					visibilityChanging = false;
+				}
+				dispatchEvent(new Event(DETAILS_CHANGE_EVENT));
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<mx:NumberFormatter decimalSeparatorTo="{resourceManager.getString('planetRenderers', 
+			'list.renderer.distanse.decimal.separator')}"
+			id="distanceFormatter"
+			precision="0"
+			rounding="nearest"
+			thousandsSeparatorTo="{resourceManager.getString('planetRenderers', 
+			'list.renderer.distanse.thousands.separator')}"/>
+		<mx:NumberFormatter decimalSeparatorTo="{resourceManager.getString('planetRenderers', 
+			'list.renderer.distanse.decimal.separator')}"
+			id="periodFormatter"
+			precision="2"
+			rounding="nearest"
+			thousandsSeparatorTo="{resourceManager.getString('planetRenderers', 
+			'list.renderer.distanse.thousands.separator')}"/>
+		<s:Fade alphaFrom="1"
+			alphaTo="0"
+			effectEnd="fadeOutEndHandler(event)"
+			id="fadeOut"
+			target="{this}"/>
+		<s:Fade alphaFrom="0"
+			alphaTo="1"
+			id="fadeIn"
+			target="{this}"/>
+	</fx:Declarations>
+	<s:BitmapImage height="128"
+		id="planetImage"
+		source="{details.image}"
+		width="128"/>
+	<s:VGroup>
+		<mx:Form>
+			<mx:FormHeading label="{details.name}"/>
+			<mx:FormItem label="{resourceManager.getString('planetRenderers', 
+					'list.renderer.distanse.from.sun.header')}">
+				<s:Label text="{resourceManager.getString('planetRenderers', 
+						'list.renderer.distanse.from.sun.text', 
+					[distanceFormatter.format(details.distanceFromSunKm)])}"/>
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('planetRenderers', 'list.renderer.radius.header')}">
+				<s:Label text="{resourceManager.getString('planetRenderers', 'list.renderer.radius.text', 
+					[distanceFormatter.format(details.radiusKm)])}"/>
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('planetRenderers', 'list.renderer.orbital.period.header')}">
+				<s:Label text="{resourceManager.getString('planetRenderers', 'list.renderer.orbital.period.text', 
+					[periodFormatter.format(details.orbitalPeriodInEarthDays)])}"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:VGroup>
+</s:Group>

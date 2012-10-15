@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.riapriority</groupId>
+	<artifactId>planetlist</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>swf</packaging>
+
+	<name>planetlist Flex</name>
+
+	<properties>
+		<project-filename>SolarPlanetList</project-filename>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	    <flexmojos-maven-plugin.version>3.9</flexmojos-maven-plugin.version>
+  	    <flex.sdk.version>4.1.0.16076</flex.sdk.version>
+        <!--flex.unit.version>4.0-rc-1</flex.unit.version-->
+	</properties>
+
+
+	<build>
+		<!--finalName>${project-filename}</finalName-->
+		<sourceDirectory>src/main/flex</sourceDirectory>
+		<testSourceDirectory>src/test/flex</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+	            <version>${flexmojos-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<sourceFile>${project-filename}.mxml</sourceFile>
+					<resourceBundlePath>${basedir}/src/main/resources/locale/{locale}</resourceBundlePath>
+					<output>${project.build.directory}/${project-filename}.swf</output>
+					<compiledLocales>
+						<locale>en_US</locale>
+						<!--locale>ru_RU</locale-->
+					</compiledLocales>
+					<skipTests>true</skipTests>
+					<allowSourcePathOverlap>true</allowSourcePathOverlap>
+					<targetPlayer>10.0.0</targetPlayer>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.sdk.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+						<configuration>
+							<templateURI>embed:express-installation-with-history</templateURI>
+							<htmlName>${project-filename}</htmlName>
+							<parameters>
+								<swf>${project-filename}</swf>
+								<!--bgcolor>#222222</bgcolor-->
+								<version_major>10</version_major>
+								<version_minor>0</version_minor>
+								<version_revision>0</version_revision>
+							</parameters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.sdk.version}</version>
+			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.adobe.flex.framework</groupId>
+					<artifactId>playerglobal</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>playerglobal</artifactId>
+			<version>${flex.sdk.version}</version>
+			<type>swc</type>
+			<classifier>10.0</classifier>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>com.adobe.flexunit</groupId>-->
+<!--			<artifactId>flexunit</artifactId>-->
+<!--			<version>4.0-rc-1</version>-->
+<!--			<type>swc</type>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+<!---->
+<!--		<dependency>-->
+<!--			<groupId>asmock</groupId>-->
+<!--			<artifactId>asmock</artifactId>-->
+<!--			<type>swc</type>-->
+<!--			<scope>test</scope>-->
+<!--			<version>1.0-rc</version>-->
+<!--		</dependency>-->
+<!---->
+<!--		<dependency>-->
+<!--			<groupId>asmock</groupId>-->
+<!--			<artifactId>asmock-flexunit4</artifactId>-->
+<!--			<type>swc</type>-->
+<!--			<scope>test</scope>-->
+<!--			<version>1.0-rc</version>-->
+<!--		</dependency>-->
+	</dependencies>
+</project>
