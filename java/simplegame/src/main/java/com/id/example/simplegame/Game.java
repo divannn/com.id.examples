@@ -18,8 +18,10 @@ public class Game extends Canvas implements Runnable {
     public static int HEIGHT = 300;
     public static String NAME = "GAME";
 
-    private boolean leftPressed = false;
-    private boolean rightPressed = false;
+    private boolean leftPressed;
+    private boolean rightPressed;
+    private boolean upPressed;
+    private boolean downPressed;
 
     public static Sprite hero;
     private static int x = 0;
@@ -53,7 +55,6 @@ public class Game extends Canvas implements Runnable {
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
             createBufferStrategy(2);
-            requestFocus();
             return;
         }
 
@@ -71,6 +72,12 @@ public class Game extends Canvas implements Runnable {
         }
         if (rightPressed == true) {
             x++;
+        }
+        if (upPressed == true) {
+            y--;
+        }
+        if (downPressed == true) {
+            y++;
         }
     }
 
@@ -108,6 +115,12 @@ public class Game extends Canvas implements Runnable {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 rightPressed = true;
             }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                upPressed = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                downPressed = true;
+            }
         }
 
         public void keyReleased(KeyEvent e) {
@@ -116,6 +129,12 @@ public class Game extends Canvas implements Runnable {
             }
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 rightPressed = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                upPressed = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                downPressed = false;
             }
         }
     }
