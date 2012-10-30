@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.asfusion.mate</groupId>
             <artifactId>mate-framework</artifactId>
-            <version>0.9</version>
+            <version>0.8.9</version>
             <type>swc</type>
         </dependency>
     </dependencies>
@@ -85,24 +85,22 @@
         <repository>
             <id>flex-mojos-repository</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+           <releases><enabled>true</enabled></releases>
+           <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <repository>
+           <id>mate-repository</id>
+           <url>http://mate-framework.googlecode.com/svn/trunk/maven</url>
+           <releases><enabled>true</enabled></releases>
+           <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>flex-mojos-plugin-repository</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+           <releases><enabled>true</enabled></releases>
+           <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 
