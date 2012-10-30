@@ -46,6 +46,12 @@
             <type>swc</type>
             <scope>theme</scope>
         </dependency>
+        <dependency>
+            <groupId>com.asfusion.mate</groupId>
+            <artifactId>mate-framework</artifactId>
+            <version>0.9</version>
+            <type>swc</type>
+        </dependency>
     </dependencies>
 
     <build>
