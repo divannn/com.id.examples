@@ -1,0 +1,34 @@
+//specify the GradleFx plugin as a dependency for this build script. Maven Central will be used to get it.
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6'
+    }
+}
+
+apply plugin: 'gradlefx'
+
+version = '1.0-SNAPSHOT'
+type = 'swf'
+
+//flexHome = 'D:/Tools/FlexSdk/flexSdk-4.5.1.21328'
+flexHome = 'D:/Tools/FlexSdk/flexSdk-4.1.0.16076'
+
+//the default for 'swf' (and other non-library types) is 'rsl'
+frameworkLinkage = 'merged'
+
+srcDirs = ['src/main/flex']
+testDirs = ['src/test/flex']
+
+mainClass = 'package1.Main'
+
+//to avoid russian compiler messages.
+jvmArguments = ['-Duser.language=en','-Duser.country=US']
+
+repositories {
+	mavenCentral()
+	//mavenRepo name: 'yoolab-releases',      url: "http://projects.yoolab.org/maven/content/repositories/releases"
+}
+

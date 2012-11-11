@@ -1,6 +1,9 @@
 ##Maven
 target/
 
+##Gradle
+.gradle
+
 ## Idea
 .idea/
 *.iml
