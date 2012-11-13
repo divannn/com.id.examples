@@ -10,6 +10,8 @@ buildscript {
 
 apply plugin: 'gradlefx'
 
+group = 'com.id.example.flex'
+
 version = '1.0-SNAPSHOT'
 type = 'swf'
 
