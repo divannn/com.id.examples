@@ -13,7 +13,6 @@ apply plugin: 'gradlefx'
 version = '1.0-SNAPSHOT'
 type = 'swf'
 
-//flexHome = 'D:/Tools/FlexSdk/flexSdk-4.5.1.21328'
 flexHome = 'D:/Tools/FlexSdk/flexSdk-4.1.0.16076'
 
 //the default for 'swf' (and other non-library types) is 'rsl'
