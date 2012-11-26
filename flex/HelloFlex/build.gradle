@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6'
+        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6.1'
     }
 }
 
@@ -20,6 +20,7 @@ frameworkLinkage = 'merged'
 
 srcDirs = ['src/main/flex']
 testDirs = ['src/test/flex']
+buildDir = 'target-gradle'
 
 mainClass = 'package1.Main'
 
