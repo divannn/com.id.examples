@@ -3,6 +3,7 @@ target/
 
 ##Gradle
 .gradle
+target-gradle/
 
 ## Idea
 .idea/
