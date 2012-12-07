@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+                xmlns:maps="com.asfusion.mate.stockQuoteExample.maps.*"
+                xmlns:views="com.asfusion.mate.stockQuoteExample.views.*"
+                viewSourceURL="srcview/index.html">
+
+    <!-- Styles______________________________________________________ -->
+
+    <mx:Style source="../resources/styles/main.css"/>
+
+    <!-- Event Maps __________________________________________________ -->
+
+    <maps:MainEventMap/>
+
+    <!-- Views _______________________________________________________ -->
+
+    <views:QuotePanel/>
+
+</mx:Application>
