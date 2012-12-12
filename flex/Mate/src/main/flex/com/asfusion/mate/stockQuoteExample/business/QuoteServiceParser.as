@@ -11,7 +11,9 @@ public class QuoteServiceParser {
 	// of an xml object. We first convert to xml
 	// and then get the properties from it
 	public function parseQuoteResults(quote:String):Object {
-trace(">>> xml " + quote);
+		trace("~~~ parse xml " );
+		trace(new XML(quote));
+		trace("~~~");
 		var xml:XML = new XML(quote);
 
 		var quoteObject:Object = new Object();
