@@ -64,7 +64,7 @@
                 <version>${flexmojos-maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <debug>false</debug>
+                    <debug>true</debug>
                     <!-- Main application file -->
                     <sourceFile>StockQuoteExample.mxml</sourceFile>
                     <storepass/>
