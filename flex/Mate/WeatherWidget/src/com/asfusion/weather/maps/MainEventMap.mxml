@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap  xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns="http://mate.asfusion.com/" 
+	xmlns:extensions="com.asfusion.weather.mate.extensions.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.asfusion.weather.events.WeatherEvent;
+			import mx.events.FlexEvent;		
+			import com.asfusion.weather.business.*;
+			import com.asfusion.weather.model.*;
+			import com.asfusion.weather.views.*;
+		]]>
+	</mx:Script>
+	
+	<!-- FlexEvent.INITIALIZE ___________________________________________________________ -->
+	
+	<EventHandlers type="{FlexEvent.INITIALIZE}">
+	
+		<MethodInvoker generator="{Initializer}" method="loadFlashVars" />
+		<EventAnnouncer generator="{WeatherEvent}" type="{WeatherEvent.GET}">
+			<Properties location="{lastReturn.location}" unit="{lastReturn.unit}" />
+		</EventAnnouncer>
+		
+	</EventHandlers>
+	
+	
+	<!-- WeatherEvent.GET ___________________________________________________________ -->
+	
+	<EventHandlers type="{WeatherEvent.GET}" debug="true">
+		<extensions:WeatherLoader> <!-- make the call to the service -->
+			<Properties location="{event.location}" unit="{event.unit}" />
+			<extensions:resultHandlers>
+				<!-- receive the results contained in the currentEvent.data property (WeatherResultEvent contains a data property) -->
+				<MethodInvoker generator="{WeatherManager}" method="setWeather" arguments="{currentEvent.data}" />
+			</extensions:resultHandlers>
+			<extensions:faultHandlers>
+				<!-- receive an error event. The error event contains a data property that contains the reason for the error -->
+				<MethodInvoker generator="{WeatherManager}" method="handleFault" arguments="{currentEvent.data}" />
+			</extensions:faultHandlers>
+		</extensions:WeatherLoader>	
+	</EventHandlers>
+	
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Injectors ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	<!-- Detail ___________________________________________________________ -->
+	
+	<Injectors target="{ Detail }">
+		<PropertyInjector targetKey="model" source="{DetailModel}" />
+	</Injectors>
+	
+	<!-- Overview ___________________________________________________________ -->
+	
+	<Injectors target="{ Overview }">
+		<PropertyInjector targetKey="model" source="{OverviewModel}" />
+	</Injectors>
+	
+	<!-- DetailModel ___________________________________________________________ -->
+	
+	<Injectors target="{DetailModel}" >
+		<PropertyInjector targetKey="units" source="{WeatherManager}" sourceKey="units" />
+		<PropertyInjector targetKey="weather" source="{WeatherManager}" sourceKey="currentWeather" />
+	</Injectors>
+	
+	
+	<!-- OverviewModel ___________________________________________________________ -->
+	
+	<Injectors target="{OverviewModel}" >
+		<PropertyInjector targetKey="weather" source="{WeatherManager}" sourceKey="currentWeather" />
+		<PropertyInjector targetKey="locationObject" source="{WeatherManager}" sourceKey="location" />
+		<PropertyInjector targetKey="icon" source="{WeatherManager}" sourceKey="currentWeatherImage" />
+	</Injectors>
+
+</EventMap>

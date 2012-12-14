@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.asfusion.weather.model.DetailModel;
+			[Bindable]
+			public var model:DetailModel
+		]]>
+	</mx:Script>
+	
+	
+	<!-- GUI _______________________________________________________ -->
+	
+	<mx:Text text="{model.description}" styleName="title" width="100%"/>
+	<mx:Text text="Humidity: {model.humidity}%" width="100%" />
+	<mx:Text text="Wind: {model.wind}" width="100%" />
+	<mx:Text text="Pressure: {model.pressure} " width="100%" />
+	<mx:Text text="Visibility: {model.visibility}" width="100%" />
+
+</mx:VBox>

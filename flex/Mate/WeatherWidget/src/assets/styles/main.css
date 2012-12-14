@@ -1,0 +1,71 @@
+/* CSS file */
+Application {
+	 backgroundGradientColors: #2E4061, #2E4061;
+	color: #FFFFFF;
+	fontFamily: Arial;
+	fontSize: 12;
+}
+
+/* ---------------------------------------------- */
+
+MainUI {
+	verticalGap: 0;	
+}
+
+Overview {
+	horizontalAlign: center;
+	paddingTop: 10;
+	verticalGap: -15;
+}
+
+Detail, About {
+	paddingTop: 10;
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingBottom: 5;
+}
+
+
+.pages {
+	borderSkin: Embed(source='assets/images/bg.jpg');
+}
+
+/* ---------------------------------------------- */
+/* Overview page */ 
+.imageContainer {
+	horizontalCenter: 0;
+	horizontalGap: -15;
+}
+
+.temperatureLabel {
+	fontSize: 32;
+}
+
+.locationLabel {
+	fontSize: 14;
+	fontWeight: bold;	
+}
+
+/* ---------------------------------------------- */
+.tabs {
+	tabStyleName: tabButton;
+	selectedTabTextStyleName: selectedTabButton;
+}
+.tabButton {
+	skin: Embed(source='assets/images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
+	textRollOverColor: #F3C556;
+	fontWeight: normal;
+}
+
+.selectedTabButton {
+	skin: Embed(source='assets/images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
+	textRollOverColor: #F3C556;
+	color: #F3C556;
+	fontWeight: normal;
+}
+
+/* ---------------------------------------------- */
+.title {
+	fontSize: 16;
+	fontWeight: bold;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%"
+	xmlns:model="com.asfusion.weather.model.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.asfusion.weather.model.OverviewModel;
+			[Bindable]
+			public var model:OverviewModel;
+		]]>
+	</mx:Script>
+
+	<!-- GUI _______________________________________________________ -->
+		
+	<mx:HBox styleName="imageContainer">
+		<mx:Image source="assets/images/weather/{model.icon}"/>
+		<mx:Label text="{model.temperature}" styleName="temperatureLabel" />
+	</mx:HBox>
+	
+	<mx:Label text="{model.location}" styleName="locationLabel"/>
+
+</mx:VBox>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Stock Quotes">
+
+    <mx:Script>
+		<![CDATA[
+        import com.asfusion.mate.stockQuoteExample.events.QuoteEvent;
+
+        [Bindable]
+        public var price:Number = 0;
+
+        // -------------------------------------------------
+        // perform the action - dispatch an event
+        private function getQuote():void {
+            var quoteEvent:QuoteEvent = new QuoteEvent(QuoteEvent.GET);
+            quoteEvent.symbol = symbolInput.text;
+
+            dispatchEvent(quoteEvent);
+        }
+        ]]>
+	</mx:Script>
+
+    <!-- GUI ______________________________________________________________________ -->
+    <mx:HBox>
+        <mx:Label text="Symbol:"/>
+        <mx:TextInput id="symbolInput" enter="getQuote()"/>
+        <mx:Button label="Get Quote" click="getQuote()"/>
+    </mx:HBox>
+
+    <mx:Label text="Price: {price}"/>
+
+</mx:Panel>

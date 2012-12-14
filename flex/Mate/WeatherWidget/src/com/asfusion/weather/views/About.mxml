@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	
+	<mx:Label text="Mate Weather Widget" styleName="title" />
+	
+	<mx:Text condenseWhite="true" width="100%">
+		<mx:htmlText>
+			<![CDATA[
+				Powered by <a href="http://mate.asfusion.com"><u>Mate Framework</u></a> and Yahoo! Weather.<br /><br />
+				Developed by <a href="http://www.asfusion.com"><u>AsFusion</u></a>
+			]]>
+		</mx:htmlText>
+	</mx:Text>
+	
+</mx:VBox>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	xmlns:views="com.asfusion.weather.views.*">
+	
+	<mx:ViewStack id="pages" styleName="pages" width="100%" height="100%">
+	
+		<views:Overview label="Weather" /> 
+		<views:Detail label="Detail" />
+		<views:About label="About" />
+		
+	</mx:ViewStack>
+	
+	<mx:TabBar styleName="tabs" dataProvider="{pages}"   />
+	
+</mx:VBox>

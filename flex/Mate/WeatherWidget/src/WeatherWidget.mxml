@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" xmlns:views="com.asfusion.weather.views.*" 
+	xmlns:maps="com.asfusion.weather.maps.*" width="190" height="200" 
+	viewSourceURL="srcview/index.html">
+	
+	
+	<!-- Styles _______________________________________________________ -->
+	
+	<mx:Style source="assets/styles/main.css" />
+	
+	
+	<!-- Event Maps ___________________________________________________-->
+	
+	<maps:MainEventMap />
+
+	
+	<!-- GUI _______________________________________________________ -->
+	
+	<views:MainUI />
+	
+</mx:Application>
+
