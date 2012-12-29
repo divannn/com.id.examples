@@ -4,11 +4,9 @@
 	xmlns:views="com.asfusion.weather.views.*">
 	
 	<mx:ViewStack id="pages" styleName="pages" width="100%" height="100%">
-	
-		<views:Overview label="Weather" /> 
+		<views:Overview label="Weather" />
 		<views:Detail label="Detail" />
 		<views:About label="About" />
-		
 	</mx:ViewStack>
 	
 	<mx:TabBar styleName="tabs" dataProvider="{pages}"   />

@@ -1,16 +1,18 @@
 package com.asfusion.weather.business
 {		
 	import mx.core.Application;
-	
-	public class Initializer {
+import mx.core.FlexGlobals;
+
+public class Initializer {
 		
 		// ----------------------------------------------------------
 		public function loadFlashVars():Object 
 		{
 			var obj:Object = new Object();
-			obj.location = Application.application.parameters.location;
-			obj.unit = Application.application.parameters.unit;
-			
+			obj.location = FlexGlobals.topLevelApplication.parameters.location;
+			obj.unit = FlexGlobals.topLevelApplication.parameters.unit;
+
+
 			// if you are not using flas vars we set a default
 			if( obj.location == null )
 			{

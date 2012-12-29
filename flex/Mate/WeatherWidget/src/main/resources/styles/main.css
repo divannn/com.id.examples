@@ -1,4 +1,7 @@
 /* CSS file */
+@namespace "library://ns.adobe.com/flex/mx";
+@namespace views "com.asfusion.weather.views.*";
+
 Application {
 	 backgroundGradientColors: #2E4061, #2E4061;
 	color: #FFFFFF;
@@ -8,17 +11,18 @@ Application {
 
 /* ---------------------------------------------- */
 
-MainUI {
+views|MainUI {
 	verticalGap: 0;	
 }
 
-Overview {
+views|Overview {
 	horizontalAlign: center;
 	paddingTop: 10;
 	verticalGap: -15;
 }
 
-Detail, About {
+views|Detail,
+views|About {
 	paddingTop: 10;
 	paddingLeft: 10;
 	paddingRight: 10;
@@ -27,7 +31,7 @@ Detail, About {
 
 
 .pages {
-	borderSkin: Embed(source='assets/images/bg.jpg');
+	borderSkin: Embed(source='../images/bg.jpg');
 }
 
 /* ---------------------------------------------- */
@@ -52,13 +56,13 @@ Detail, About {
 	selectedTabTextStyleName: selectedTabButton;
 }
 .tabButton {
-	skin: Embed(source='assets/images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
+	skin: Embed(source='../images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
 	textRollOverColor: #F3C556;
 	fontWeight: normal;
 }
 
 .selectedTabButton {
-	skin: Embed(source='assets/images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
+	skin: Embed(source='../images/tab.png', scaleGridLeft=5, scaleGridRight=33, scaleGridTop=7,scaleGridBottom=17);
 	textRollOverColor: #F3C556;
 	color: #F3C556;
 	fontWeight: normal;

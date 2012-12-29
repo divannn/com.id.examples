@@ -14,7 +14,7 @@
 	<!-- GUI _______________________________________________________ -->
 		
 	<mx:HBox styleName="imageContainer">
-		<mx:Image source="assets/images/weather/{model.icon}"/>
+		<mx:Image source="images/weather/{model.icon}"/>
 		<mx:Label text="{model.temperature}" styleName="temperatureLabel" />
 	</mx:HBox>
 	
