@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6.1'
+        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6.2'
     }
 }
 
@@ -30,8 +30,7 @@ mainClass = 'StockQuoteExample.mxml'
 jvmArguments = ['-Duser.language=en','-Duser.country=US']
 
 dependencies {
-	merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
-
+    merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
     theme files("${flexHome}/frameworks/themes/Halo/halo.swc")
 }
 
