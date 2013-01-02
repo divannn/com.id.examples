@@ -97,6 +97,12 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
+            <id>flex-mojos-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup</url>
+           <releases><enabled>true</enabled></releases>
+           <snapshots><enabled>false</enabled></snapshots>
+        </pluginRepository>
+        <pluginRepository>
             <id>flex-mojos-plugin-repository</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup</url>
            <releases><enabled>true</enabled></releases>
