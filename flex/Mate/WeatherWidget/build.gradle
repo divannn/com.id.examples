@@ -9,8 +9,8 @@ buildscript {
 }
 
 apply plugin: 'gradlefx'
+//apply plugin: 'maven'
 
-group = 'com.id.example.flex'
 
 version = '1.0-SNAPSHOT'
 type = 'swf'
@@ -24,13 +24,21 @@ srcDirs = ['src/main/flex']
 testDirs = ['src/test/flex']
 buildDir = 'target-gradle'
 
-mainClass = 'package1.Main'
+mainClass = 'WeatherWidget.mxml'
 
 //to avoid russian compiler messages.
 jvmArguments = ['-Duser.language=en','-Duser.country=US']
 
+dependencies {
+	merged group: 'com.asfusion.mate', name: 'mate-framework', version: '0.8.9', ext: 'swc'
+	merged files('libs/AstraWebAPIs.swc')
+
+    theme files("${flexHome}/frameworks/themes/Halo/halo.swc")
+}
+
 repositories {
-	mavenCentral()
-	//mavenRepo name: 'yoolab-releases',      url: "http://projects.yoolab.org/maven/content/repositories/releases"
+	mavenLocal();
+	mavenCentral();
+	mavenRepo name: 'mate-repository',  url: "http://mate-framework.googlecode.com/svn/trunk/maven"
 }
 

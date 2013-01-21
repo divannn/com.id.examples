@@ -4,12 +4,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6.2'
+        classpath group: 'org.gradlefx', name: 'gradlefx', version: '0.6.3'
     }
 }
 
 apply plugin: 'gradlefx'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 
 version = '1.0-SNAPSHOT'
