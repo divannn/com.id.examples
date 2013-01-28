@@ -4,6 +4,7 @@ def useFor():
         print i
     else:
         print "jopa"
+
 #useFor()
 
 
@@ -12,15 +13,16 @@ def useWhile():
     i = 0
     while i == 1:
         print i
-        i+= 1;
+        i += 1;
     else:
         print "jopa"
+
 #useWhile()
 
 
 #New conditional statement.
 def newCond():
-    return 1 if 2>1 else 0
+    return 1 if 2 > 1 else 0
 
 #print newCond();
 
@@ -28,20 +30,21 @@ def newCond():
 def excepionUsage():
     i = 1
     try:
-        b = i/0
-    except (Exception,IOError,NameError),e:
-        print "Cought exception:",e
+        b = i / 0
+    except (Exception, IOError, NameError), e:
+        print "Cought exception:", e
     else:
         pass
-#excepionUsage1()
+
+#excepionUsage()
 
 #Raise an exception.
 def raiseException():
     arg1 = "str"
     arg2 = 5
     try:
-        raise Exception(arg1,arg2)
-    except Exception,e:
+        raise Exception(arg1, arg2)
+    except Exception, e:
         print type(e)
         print e
 
