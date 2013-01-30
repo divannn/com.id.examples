@@ -20,6 +20,14 @@ def gcd2(a, b):
 			b = b - a
 	return a + b
 
-print gcd1(54,24)
-print gcd2(0,21)
+#3 by recursion
+def gcd3(a, b):
+	if b == 0:
+		return a
+	else:
+		return gcd3(b, a % b)
 
+
+print gcd1(54, 24)
+print gcd2(54, 24)
+print gcd3(54, 24)
