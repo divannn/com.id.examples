@@ -1,6 +1,6 @@
 __author__ = 'danili'
 
-#Utils for finding GCD - Greates Common Divisor
+#Utils for finding GCD - Greatest Common Divisor
 
 #1 by division
 def gcd1(a, b):
@@ -20,6 +20,6 @@ def gcd2(a, b):
 			b = b - a
 	return a + b
 
-print gcd1(0,2)
-print gcd2(0,2)
+print gcd1(54,24)
+print gcd2(0,21)
 
