@@ -5,13 +5,13 @@ __author__ = 'ivan'
 
 # MergeSort function.
 # Time: n*ln(n)
-def mergesort(list):
+def merge_sort(list):
 	N = len(list)
 	if N <= 1:
 		return list
 	middle = N / 2
-	left = mergesort(list[0:middle])
-	right = mergesort(list[middle: N])
+	left = merge_sort(list[0:middle])
+	right = merge_sort(list[middle: N])
 	return merge(left, right)
 
 # merges two sorted arrays.
@@ -34,7 +34,7 @@ def merge(left, right):
 def main():
 	list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
 	print ' input:' + str(list)
-	result = mergesort(list)
+	result = merge_sort(list)
 	print 'result:' + str(result)
 
 if __name__ == '__main__':

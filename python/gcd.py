@@ -28,6 +28,14 @@ def gcd3(a, b):
 		return gcd3(b, a % b)
 
 
-print gcd1(54, 24)
-print gcd2(54, 24)
-print gcd3(54, 24)
+def main():
+	i1 = 54
+	i2 = 24
+	print 'GCD for ' + str(i1) + ',' + str(i2) + ":"
+	print gcd1(i1, i2)
+	print gcd2(i1, i2)
+	print gcd3(i1, i2)
+
+if __name__ == '__main__':
+	main()
+
