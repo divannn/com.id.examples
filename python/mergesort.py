@@ -3,44 +3,39 @@
 
 __author__ = 'ivan'
 
-#MergeSort function.
+# MergeSort function.
 # Time: n*ln(n)
 def mergesort(list):
 	N = len(list)
 	if N <= 1:
-		return None
+		return list
+	#middle = int(len(list) / 2)
 	l1 = list[0:N / 2]
 	l2 = list[N / 2: N]
-	mergesort(l1)
-	mergesort(l2)
+	l1 = mergesort(l1)
+	l2 = mergesort(l2)
 	return merge(l1, l2)
 
-#merges two sorted arrays.
-def merge(list1, list2):
-	p = len(list1)
-	q = len(list2)
+# merges two sorted arrays.
+def merge(left, right):
 	result = []
+	p = len(left)
+	q = len(right)
 	i = j = 0
 	while i < p and j < q:
-		if list1[i] <= list2[j]:
-			result.append(list1[i])
+		if left[i] <= right[j]:
+			result.append(left[i])
 			i += 1
 		else:
-			result.append(list2[j])
+			result.append(right[j])
 			j += 1
-	if i == p:
-		result.extend(list2[j:])#copy rest
-	elif j == q:
-		result.extend(list1[i:])#copy rest
-	print str(list1) +"   "+str(list2)
-	print result
+	#copy rest - one of them is empty.
+	result += left[i:]
+	result += right[j:]
 	return result
 
-list = [5, 2, 6, 3, 1, 4, 7, 9, 8]
-print 'input:' + str(list)
+# test
+list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
+print ' input:' + str(list)
 result = mergesort(list)
 print 'result:' + str(result)
-
-#merge([0,2,5],[3,6,9])
-
-
