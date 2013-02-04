@@ -9,16 +9,20 @@ def mergesort(list):
 	N = len(list)
 	if N <= 1:
 		return list
-	middle = N / 2
-	left = mergesort(list[0:middle])
-	right = mergesort(list[middle: N])
-	return merge(left, right)
+	#middle = int(len(list) / 2)
+	l1 = list[0:N / 2]
+	l2 = list[N / 2: N]
+	l1 = mergesort(l1)
+	l2 = mergesort(l2)
+	return merge(l1, l2)
 
 # merges two sorted arrays.
 def merge(left, right):
 	result = []
+	p = len(left)
+	q = len(right)
 	i = j = 0
-	while i < len(left) and j < len(right):
+	while i < p and j < q:
 		if left[i] <= right[j]:
 			result.append(left[i])
 			i += 1
@@ -30,12 +34,8 @@ def merge(left, right):
 	result += right[j:]
 	return result
 
-
-def main():
-	list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
-	print ' input:' + str(list)
-	result = mergesort(list)
-	print 'result:' + str(result)
-
-if __name__ == '__main__':
-	main()
+# test
+list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
+print ' input:' + str(list)
+result = mergesort(list)
+print 'result:' + str(result)
