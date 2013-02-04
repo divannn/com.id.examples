@@ -3,39 +3,28 @@
 
 __author__ = 'ivan'
 
-# MergeSort function.
-# Time: n*ln(n)
-def mergesort(list):
+# SelectionSort function.
+# Time: n*n
+def selection_sort(list):
 	N = len(list)
-	if N <= 1:
-		return list
-	#middle = int(len(list) / 2)
-	l1 = list[0:N / 2]
-	l2 = list[N / 2: N]
-	l1 = mergesort(l1)
-	l2 = mergesort(l2)
-	return merge(l1, l2)
+	for i in range(0, N - 1):
+		minInd = list[i]
+		for j in range(i, N - 1):
+			if list[j] <= list[minInd]:
+				minInd = j
+		#swap
+		tmp = list[i]
+		list[i] = list[minInd]
+		list[minInd] = tmp
+		#print list
+	return list
 
-# merges two sorted arrays.
-def merge(left, right):
-	result = []
-	p = len(left)
-	q = len(right)
-	i = j = 0
-	while i < p and j < q:
-		if left[i] <= right[j]:
-			result.append(left[i])
-			i += 1
-		else:
-			result.append(right[j])
-			j += 1
-	#copy rest - one of them is empty.
-	result += left[i:]
-	result += right[j:]
-	return result
 
-# test
-list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
-print ' input:' + str(list)
-result = mergesort(list)
-print 'result:' + str(result)
+def main():
+	list = [5, 2, 6, 3, 1, 4, 7, 9, 0, 8]
+	print ' input:' + str(list)
+	result = selection_sort(list)
+	print 'result:' + str(result)
+
+if __name__ == '__main__':
+	main()
